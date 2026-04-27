@@ -4,10 +4,7 @@ import com.emily.todo_list_api.entities.enums.UrgencyLevel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,7 +22,7 @@ public abstract class BaseTask {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_task", unique = true)
+    @Column(name = "id_task", updatable = false, nullable = false)
     private UUID uuid;
 
     @NotBlank(message = "O nome é obrigatório")
@@ -37,20 +34,21 @@ public abstract class BaseTask {
     private String description;
 
     @CreationTimestamp
-    @Column(name = "createdAt", updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updatedAt")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "dueDate")
+    @Column(name = "due_date")
     private LocalDateTime dueDate;
 
+    @Builder.Default
     @Column(name = "active", nullable = false)
     private boolean active = true;
 
-    @Column(name = "deletedAt")
+    @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
     @ManyToOne
@@ -58,6 +56,6 @@ public abstract class BaseTask {
     private Step step;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "urgencyLevel")
+    @Column(name = "urgency_level")
     private UrgencyLevel urgency;
 }
