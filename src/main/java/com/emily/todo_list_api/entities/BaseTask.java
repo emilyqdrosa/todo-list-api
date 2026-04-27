@@ -21,7 +21,7 @@ import java.util.UUID;
 public abstract class BaseTask {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_task", updatable = false, nullable = false)
     private UUID uuid;
 
