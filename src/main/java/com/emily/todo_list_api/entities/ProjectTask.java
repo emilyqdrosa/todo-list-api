@@ -2,11 +2,10 @@ package com.emily.todo_list_api.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@SuperBuilder
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
